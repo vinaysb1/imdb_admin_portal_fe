@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import AddMovieForm from './AddMovieForm';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+const [movies,setMovies] = useState ([]);
+useEffect(()=> {
+  fetchMovies();
+}, [])
+
+fetchMovies = async () =>{
+  try{
+    await axios.get('http://localhost:4000/api/movies')
+    setMovies(response.data.movies);
+     }catch(error) {
+      console.error('error fetching movie:',error)
+     }
 }
 
-export default App;
+const handleAddMovie = async() => {
+ await fetchMovies();
+}
+
+  return (
+    <div>
+      <h1>Movies</h1>
+      <AddMovieForm onAdd={handleAddMovie}/>
+      <div>
+        {movies.map((movie)=>(
+          <div key = {movie.id}>
+            <h2>{movie.title}</h2>
+            <p>{movie.description}</p>
+            </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default App
