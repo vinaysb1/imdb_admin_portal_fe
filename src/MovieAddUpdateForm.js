@@ -64,71 +64,78 @@ const MovieAddUpdateForm = ({ movie, onUpdate, onCancel }) => {
   
 
   return (
-    <div>
-      <h2>Add Movie</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            name="description"
-            id="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <div>
-          <label htmlFor="release_date">Release Date</label>
-          <input
-            type="date"
-            name="release_date"
-            id="release_date"
-            value={formData.release_date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="genre">Genre</label>
-          <input
-            type="text"
-            name="genre"
-            id="genre"
-            placeholder="e.g. Action, Comedy"
-            value={formData.genre}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="poster_url">Poster URL</label>
-          <input
-            type="url"
-            name="poster_url"
-            id="poster_url"
-            value={formData.poster_url}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <button type="button" onClick={handleCancel}>
-            Cancel
-          </button>
-          <button type="submit">{movie ? "Update Movie" : "Add Movie"}</button>
-        </div>
-      </form>
+    <div className="card mb-4">
+      <div className="card-body">
+        <h2 className="card-title">Add Movie</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              name="title"
+              id="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              className="form-control"
+              name="description"
+              id="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="release_date">Release Date</label>
+            <input
+              type="date"
+              className="form-control"
+              name="release_date"
+              id="release_date"
+              value={formData.release_date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="genre">Genre</label>
+            <input
+              type="text"
+              className="form-control"
+              name="genre"
+              id="genre"
+              placeholder="e.g. Action, Comedy"
+              value={formData.genre}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="poster_url">Poster URL</label>
+            <input
+              type="url"
+              className="form-control"
+              name="poster_url"
+              id="poster_url"
+              value={formData.poster_url}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <button type="button" className="btn btn-secondary mr-2" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button type="submit" className="btn btn-primary">{movie ? "Update Movie" : "Add Movie"}</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

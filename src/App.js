@@ -28,28 +28,29 @@ const App = () => {
     setUpdateMovie(null);
   };
 
-
-  const handleDeleteMovie = async(id) => {
-    try{
+  const handleDeleteMovie = async (id) => {
+    try {
       await axios.delete(`http://localhost:4000/api/movies/${id}`);
       await fetchMovies();
-    }catch(error) {
-      console.error('error deleting movie:',error)
+    } catch (error) {
+      console.error('Error deleting movie:', error);
     }
   };
 
   return (
-    <div >
-      <h1 >Movies</h1>
+    <div className="container">
+      <h1>Movies</h1>
       <MovieAddUpdateForm movie={updateMovie} onUpdate={handleAddOrUpdateMovie} onCancel={handleCancel} />
-      <div className="mt-8">
+      <div className="mt-4">
         {movies.map((movie) => (
-          <div key={movie.id}>
-            <h2>{movie.title}</h2>
-            <p >{movie.description}</p>
-            <div >
-              <button onClick={() => setUpdateMovie(movie)}>Update</button>
-              <button onClick={() => handleDeleteMovie(movie.id)}>Delete</button>
+          <div key={movie.id} className="card mb-3">
+            <div className="card-body">
+              <h5 className="card-title">{movie.title}</h5>
+              <p className="card-text">{movie.description}</p>
+              <div className="d-flex justify-content-between">
+                <button className="btn btn-primary" onClick={() => setUpdateMovie(movie)}>Update</button>
+                <button className="btn btn-danger" onClick={() => handleDeleteMovie(movie.id)}>Delete</button>
+              </div>
             </div>
           </div>
         ))}
