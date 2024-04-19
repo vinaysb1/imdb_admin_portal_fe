@@ -1,36 +1,44 @@
 import React, { useEffect, useState } from 'react'
-import AddMovieForm from './AddMovieForm';
+import MovieAddUpdateForm from './MovieAddUpdateForm';
 import axios from 'axios';
 
 
 const App = () => {
 const [movies,setMovies] = useState ([]);
+const [updateMovie,setUpdateMovie] = useState(null)
+
 useEffect(()=> {
   fetchMovies();
 }, [])
 
-fetchMovies = async () =>{
+ const fetchMovies = async () =>{
   try{
-    await axios.get('http://localhost:4000/api/movies')
-    setMovies(response.data.movies);
+    const response = await axios.get('http://localhost:4000/api/movies');
+      setMovies(response.data.movies);
      }catch(error) {
       console.error('error fetching movie:',error)
      }
 }
 
-const handleAddMovie = async() => {
+const handleAddorUpdateMovie = async() => {
+ setUpdateMovie(null);
  await fetchMovies();
 }
+
+const handleCancel = () => {
+  setUpdateMovie(null);
+};
 
   return (
     <div>
       <h1>Movies</h1>
-      <AddMovieForm onAdd={handleAddMovie}/>
+      <MovieAddUpdateForm  movie={updateMovie} onUpdate={handleAddorUpdateMovie} onCancel={handleCancel}/>
       <div>
         {movies.map((movie)=>(
           <div key = {movie.id}>
             <h2>{movie.title}</h2>
             <p>{movie.description}</p>
+            <button onClick={()=>setUpdateMovie(movie)}>Update</button>
             </div>
         ))}
       </div>
